@@ -1,2 +1,3 @@
 Stan konta zmienił się o 1000. Komentarz: wpłata. Saldo bieżące: 2000.0
 Stan konta zmienił się o 1000. Komentarz: wpłata. Saldo bieżące: 3000.0
+Sprzedano 10 szt. towaru: buty. Saldo bieżące: 3355.0 

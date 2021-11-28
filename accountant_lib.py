@@ -12,11 +12,11 @@ class Manager:
             print('in add_command')
             print(command)
             self.allowed_commands[command] = func
-            print(self.allowed_commands)
+        print(self.allowed_commands)
         return add_command
         
 
-    def run_command(self, command):
+    def run_command(self, command, *args, **kwargs):
         print('in run_command')
         print(command)
         print(self.allowed_commands)
@@ -24,17 +24,17 @@ class Manager:
             print('Wprowadzono nieprawidłową komendę.')
         else:
             print('good')
-            self.allowed_commands[command](self)
+            self.allowed_commands[command](self, *args, **kwargs)
 
 manager = Manager()
 
 @manager.assign('saldo')
 def saldo(
         manager, 
-        filename=sys.argv[1], 
-        amount=sys.argv[2], 
-        comment=sys.argv[3]
-        ):
+        filename, 
+        amount, 
+        comment
+):
         with open(filename) as store:
             acc_balance = store.readline()
             products = store.readlines()
@@ -49,11 +49,11 @@ def saldo(
 @manager.assign('sprzedaz')
 def sprzedaz(
         manager,
-        filename=sys.argv[1], 
-        item_id=sys.argv[2], 
-        price=sys.argv[3], 
-        amount=sys.argv[4]
-        ):
+        filename, 
+        item_id, 
+        price, 
+        amount
+):
 
     with open(filename) as store:
         acc_balance = store.readline()
@@ -90,11 +90,11 @@ def sprzedaz(
 @manager.assign('zakup')
 def zakup(
         manager, 
-        filename=sys.argv[1], 
-        item_id=sys.argv[2], 
-        price=sys.argv[3], 
-        amount=sys.argv[4]
-        ):   
+        filename, 
+        item_id, 
+        price, 
+        amount
+):   
 
     with open(filename) as store:
         acc_balance = float(store.readline())
@@ -135,5 +135,33 @@ def zakup(
                 store.write(line)
         with open('logs.txt', 'a') as logs:
             logs.write(f'Zakupiono {amount} szt. towaru: {item_id}. Saldo bieżące: {acc_balance} '+ '\n')
-    
 
+@manager.assign('konto')
+def konto(manager, filename):
+
+    with open(filename) as store:
+        acc_balance = float(store.readline())
+        print(f'Saldo bieżące: {acc_balance} zł.')
+
+@manager.assign('magazyn')
+def magazyn(manager, filename, *items):
+
+    with open(filename) as store:
+        acc_balance = store.readline()
+        products = store.readlines()
+        for item in items:
+            item_found = False
+            for line in products:
+                if item in line:
+                    item_found = True 
+                    product_data = line.split(';')
+                    product_id = product_data[0]
+                    product_price = float(product_data[1])
+                    product_amount = int(product_data[2])
+                    print(f'{product_id}:{product_amount}' + '\n')
+                    break
+                else:
+                    continue
+            if not item_found:
+                print(f'Brak produktu: {item} w magazynie.' + '\n')
+    

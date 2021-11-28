@@ -3,3 +3,6 @@ Stan konta zmienił się o 1000. Komentarz: wpłata. Saldo bieżące: 3000.0
 Sprzedano 10 szt. towaru: buty. Saldo bieżące: 3355.0 
 Zakupiono 2 szt. towaru: rower. Saldo bieżące: 2655.0 
 Sprzedano 10 szt. towaru: buty. Saldo bieżące: 3010.0 
+Stan konta zmienił się o 2000. Komentarz: wpłata. Saldo bieżące: 5010.0
+Sprzedano 2 szt. towaru: parasol. Saldo bieżące: 5040.0 
+Zakupiono 10 szt. towaru: szorty. Saldo bieżące: 4710.0 

@@ -1,5 +1,6 @@
-3010.0
+4710.0
 buty;35.5;0
-parasol;15;32
+parasol;15.0;30
 kurtka;70;18
 rower;350.0;2
+szorty;33.0;10

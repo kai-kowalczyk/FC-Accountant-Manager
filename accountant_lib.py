@@ -6,24 +6,15 @@ class Manager:
         self.allowed_commands = {}
 
     def assign(self, command):
-        print('in assign')
-        print(command)
         def add_command(func):
-            print('in add_command')
-            print(command)
             self.allowed_commands[command] = func
-        print(self.allowed_commands)
         return add_command
         
 
     def run_command(self, command, *args, **kwargs):
-        print('in run_command')
-        print(command)
-        print(self.allowed_commands)
         if command not in self.allowed_commands:
             print('Wprowadzono nieprawidłową komendę.')
         else:
-            print('good')
             self.allowed_commands[command](self, *args, **kwargs)
 
 manager = Manager()
@@ -164,4 +155,12 @@ def magazyn(manager, filename, *items):
                     continue
             if not item_found:
                 print(f'Brak produktu: {item} w magazynie.' + '\n')
+
+@manager.assign('przeglad')
+def przeglad(manager, filename):
+
+    with open(filename) as logs:
+        history = logs.readlines()
+        for line in history:
+            print(line)
     
